@@ -22,6 +22,9 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/test');
 var db = mongoose.connection;
 
+var schema = {};
+require('./schema')(schema);
+
 
 // all environments
 app.set('port', process.env.PORT || 3000);
