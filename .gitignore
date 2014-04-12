@@ -1,0 +1,8 @@
+!node_modules/
+!app.js
+!schema.js
+!views/
+!routes/
+!README.md
+!public/
+!package.json
