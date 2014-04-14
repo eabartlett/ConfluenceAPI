@@ -12,6 +12,8 @@ var fs = require('fs');
 
 var app = express();
 
+app.use(express.bodyParser());
+
 var options = {
   key: fs.readFileSync('./www.eabartlett.com.key'),
   cert: fs.readFileSync('./www.eabartlett.com.crt')
@@ -24,7 +26,6 @@ var db = mongoose.connection;
 
 var schema = {};
 require('./schema')(schema);
-
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -47,6 +48,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/users', user.list);
+app.post('/api/nq', routes.api.newQuestion(db,schema));
 
 https.createServer(options, app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
