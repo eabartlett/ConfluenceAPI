@@ -14,10 +14,15 @@ var answerSchema = Schema({
   question: types.ObjectId,
   time: Number,
   user: types.ObjectId,
-  audio: String
+  audio: File
 });
 
 var Answer = mongoose.model('Answer', answerSchema);
+
+/** TODO
+ * Come up with all the mongodb queries we'll need and make them static functions
+ * Filter Answers by User
+ */
 
 module.exports = function(schema){
   schema.answer = Answer;

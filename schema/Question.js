@@ -15,24 +15,19 @@ var questionSchema = Schema({
   question: String,
   time: Number,
   //Commented out for testing user: types.ObjectId,
-  audio: String,
+  audio: File,
   answers: Array
 });
 
+/** TODO
+ * Come up with all the mongodb queries we'll need and make them static functions
+ * Add in actually searching in the question? Not sure exactly how that's going to work
+ * Filter Questions by language
+ * Filter questions by User
+ */
+
 var Question = mongoose.model('Question', questionSchema);
 
-function findById(id){
-  return Question.findOne({id: id}, function(err, question){
-    if(err) return { error: true };
-    return {
-      question: question.question,
-      id: question.id,
-      time: question.time,
-      audio: question.audio
-      answers: question.answers
-    }
-  });
-}
 module.exports = function(schema){
   schema.question = Question;
 };

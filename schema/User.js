@@ -25,7 +25,7 @@ var userSchema = Schema({
   questions: Array,
   answers: Array,
   langs: Array,
-  pic: String
+  pic: File
 });
 
 var User = mongoose.model('User', userSchema);
