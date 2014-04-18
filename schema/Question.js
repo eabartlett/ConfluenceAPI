@@ -21,6 +21,18 @@ var questionSchema = Schema({
 
 var Question = mongoose.model('Question', questionSchema);
 
+function findById(id){
+  return Question.findOne({id: id}, function(err, question){
+    if(err) return { error: true };
+    return {
+      question: question.question,
+      id: question.id,
+      time: question.time,
+      audio: question.audio
+      answers: question.answers
+    }
+  });
+}
 module.exports = function(schema){
   schema.question = Question;
 };
