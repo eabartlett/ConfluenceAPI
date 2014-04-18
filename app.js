@@ -46,9 +46,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
 app.get('/users', user.list);
-app.post('/api/nq', routes.api.newQuestion(db,schema));
+app.post('/api', routes.api(db,schema));
 
 https.createServer(options, app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

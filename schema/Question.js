@@ -14,7 +14,7 @@ var types = mongoose.Schema.Types;
 var questionSchema = Schema({
   question: String,
   time: Number,
-  user: types.ObjectId,
+  //Commented out for testing user: types.ObjectId,
   audio: String,
   answers: Array
 });
