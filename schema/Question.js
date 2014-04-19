@@ -8,15 +8,38 @@
 */
 
 var mongoose = require('mongoose');
+var path = require('path');
 var Schema = mongoose.Schema;
 var types = mongoose.Schema.Types;
 
+var filePluginLib = require('mongoose-file');
+var filePlugin = filePluginLib.filePlugin;
+var make_upload_to_model = filePluginLib.make_upload_to_model;
+
+var uploadDir = path.join(__dirname, 'uploads');
+
 var questionSchema = Schema({
-  question: String,
-  time: Number,
-  //Commented out for testing user: types.ObjectId,
-  audio: File,
-  answers: Array
+  /*Commented out for testing, need to figure out exactly how this is going to work
+  user: {
+    type: types.ObjectID,
+    required: true,
+  }*/
+  question: {
+    type: String,
+    validation: function(v){return v.length > 0}, 
+    required: true
+  },
+  time: {
+    type: Date,
+    default: Date.now,
+    validation: function(v){return v > 0},
+    require: true
+  },
+  answers: {
+    type: Array,
+    default: [],
+    require: true
+  }
 });
 
 /** TODO

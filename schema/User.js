@@ -19,20 +19,50 @@ var filePluginLib = require('mongoose-file');
 var filePlugin = filePluginLib.filePlugin;
 var make_upload_to_model = filePluginLib.make_upload_to_model;
 
-var uploadDir = path.join(__dirname, uploads);`
+var uploadDir = path.join(__dirname, 'uploads');
 
 //TODO add in the plugin to schema
 
 var userSchema = Schema({
-  username: String,
-  email: String,
-  firstName: String,
-  lastName: String,
-  username: String,
-  pw: String,
-  questions: Array,
-  answers: Array,
-  langs: Array,
+  username: {
+    type: String,
+    default: 'Confluence',
+    required: true,
+    unique: true
+  },
+  email: {
+    type: String,
+    default: 'eb@confluence.com',
+    required: true,
+    unique: true
+  },
+  firstname: {
+    type: String,
+    default: 'Anon',
+    required: true
+  },
+  lastname: {
+    type: String,
+    default: 'Mouse',
+    required: true
+  },
+  pw: {
+    type: String,
+    default: '8675309',
+    required: true
+  },
+  questions: {
+    type: Array,
+    default: [],
+  },
+  answers: {
+    type: Array,
+    default: [],
+  },
+  languages: {
+    type: Array,
+    default: [],
+  }
 });
 
 var User = mongoose.model('User', userSchema);
