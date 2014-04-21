@@ -53,11 +53,18 @@ var userSchema = Schema({
     type: Array,
     default: [],
   },
-  languages: {
+  learningLanguages: {
     type: Array,
-    default: [],
+    default: []
+  }
+  profLanguages: {
+    type: Arra,
+    default: []
   }
 });
+
+/** Queries to create/execute (Schema methods)
+ * Find all questions
 
 var User = mongoose.model('User', userSchema);
 
