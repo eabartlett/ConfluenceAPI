@@ -15,12 +15,6 @@ var mongoose = require('mongoose');
 var path = require('path');
 var Schema = mongoose.Schema;
 
-var filePluginLib = require('mongoose-file');
-var filePlugin = filePluginLib.filePlugin;
-var make_upload_to_model = filePluginLib.make_upload_to_model;
-
-var uploadDir = path.join(__dirname, 'uploads');
-
 //TODO add in the plugin to schema
 
 var userSchema = Schema({

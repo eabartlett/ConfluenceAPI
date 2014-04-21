@@ -7,15 +7,9 @@
 */
 
 var mongoose = require('mongoose');
-var path = require('path');
 var Schema = mongoose.Schema;
 var types = mongoose.Schema.Types;
 
-var filePluginLib = require('mongoose-file');
-var filePlugin = filePluginLib.filePlugin;
-var make_upload_to_model = filePluginLib.make_upload_to_model;
-
-var uploadDir = path.join(__dirname, 'uploads');
 var answerSchema = Schema({
   /* Put in once basic testing is done
   question: {
@@ -36,8 +30,13 @@ var answerSchema = Schema({
   user: {
     type: types.ObjectId,
     required: true
-  }
+  },
   */
+  audio: {
+    type: String,
+    default: null,
+    required: false
+  }
 });
 
 var Answer = mongoose.model('Answer', answerSchema);

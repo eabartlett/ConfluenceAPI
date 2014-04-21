@@ -8,15 +8,8 @@
 */
 
 var mongoose = require('mongoose');
-var path = require('path');
 var Schema = mongoose.Schema;
 var types = mongoose.Schema.Types;
-
-var filePluginLib = require('mongoose-file');
-var filePlugin = filePluginLib.filePlugin;
-var make_upload_to_model = filePluginLib.make_upload_to_model;
-
-var uploadDir = path.join(__dirname, 'uploads');
 
 var questionSchema = Schema({
   /*Commented out for testing, need to figure out exactly how this is going to work
@@ -39,6 +32,10 @@ var questionSchema = Schema({
     type: Array,
     default: [],
     require: true
+  },
+  audio: {
+    type: String,
+    require: false
   }
 });
 

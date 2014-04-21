@@ -1,5 +1,6 @@
-
-/**
+/** author: eabartlett
+ * Main application file for Confluence API
+ * 
  * Module dependencies.
  */
 
@@ -47,8 +48,14 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/users', user.list);
-app.post('/api', routes.api(db,schema));
+app.post('/api/question', routes.question.post(db,schema));
+app.post('/api/answer', routes.answer.post(db, schema));
+app.get('/api/question', routes.question.get(db, schema));
+app.get('/api/answer', routes.answer.get(db, schema));
+app.post('/api/audio', routes.audio.post(db, schema));
+app.get('/api/audio', routes.audio.get(db, schema));
 
+//TODO Change the handling so that there are different endpoints for questions and answers
 https.createServer(options, app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

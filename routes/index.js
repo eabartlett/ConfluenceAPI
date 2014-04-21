@@ -2,5 +2,7 @@
  * GET home page.
  */
 
-exports.api = require('./api.js');
-console.log(exports.api);
+exports.question = require('./question.js');
+exports.answer = require('./answer.js');
+exports.audio = require('./audio.js');
+console.log('Routes imported: ' + console.log(exports));
