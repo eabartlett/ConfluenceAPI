@@ -13,7 +13,7 @@ var fs = require('fs');
 
 var app = express();
 
-app.use(express.bodyParser());
+//app.use(express.bodyParser());
 
 var options = {
   key: fs.readFileSync('./www.eabartlett.com.key'),
@@ -27,6 +27,9 @@ var db = mongoose.connection;
 
 var schema = {};
 require('./schema')(schema);
+
+/* Path for uploads */
+var uploads = path.join(__dirname, 'uploads');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -52,7 +55,7 @@ app.post('/api/question', routes.question.post(db,schema));
 app.post('/api/answer', routes.answer.post(db, schema));
 app.get('/api/question', routes.question.get(db, schema));
 app.get('/api/answer', routes.answer.get(db, schema));
-app.post('/api/audio', routes.audio.post(db, schema));
+app.post('/api/audio', routes.audio.post(db, schema, uploads));
 app.get('/api/audio', routes.audio.get(db, schema));
 
 //TODO Change the handling so that there are different endpoints for questions and answers
