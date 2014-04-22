@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 
 var ObjectId = mongoose.Types.ObjectId;
 
-var postedCallback = util.postedCallback;
+var responseDataCallback = util.responseDataCallback;
 
 module.exports.post = function(db, schema){
   return function postQ(req, res){
