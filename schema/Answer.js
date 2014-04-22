@@ -24,7 +24,7 @@ var answerSchema = Schema({
   time: {
     type: Date,
     default: Date.now,
-    required: true
+    required: false
   },
   /* Put in once basic testing is done
   user: {

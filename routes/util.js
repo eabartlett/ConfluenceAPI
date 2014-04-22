@@ -10,4 +10,12 @@ function errorCallback(res){
   }
 }
 
+function postedCallback(res){
+  return function(err, doc){
+    if(err) errorCallback(res)(err);
+    res.end(JSON.stringify(doc));
+  }
+}
+
 exports.errorCallback = errorCallback;
+exports.postedCallback = postedCallback;

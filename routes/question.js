@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 
 var ObjectId = mongoose.Types.ObjectId;
 
-var errorCallback = util.errorCallback;
+var postedCallback = util.postedCallback;
 
 module.exports.post = function(db, schema){
   return function postQ(req, res){
@@ -19,8 +19,7 @@ module.exports.post = function(db, schema){
       lang: req.body.lang
     };
     console.log(q);
-    schema.question(q).save(errorCallback(res));
-    res.end('Success');
+    schema.question.create(q, postedCallback(res));
   }
 }
 module.exports.get = function(db, schema){
