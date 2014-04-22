@@ -56,15 +56,16 @@ var userSchema = Schema({
   learningLanguages: {
     type: Array,
     default: []
-  }
+  },
   profLanguages: {
-    type: Arra,
+    type: Array,
     default: []
   }
 });
 
 /** Queries to create/execute (Schema methods)
  * Find all questions
+ */
 
 var User = mongoose.model('User', userSchema);
 

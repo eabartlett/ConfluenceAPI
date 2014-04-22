@@ -4,8 +4,7 @@ function errorCallback(res){
       res.writeHead(403,{
         'Content-type': 'text/plain'
       });
-      res.write(err.message);
-      res.write(JSON.stringify(err.errors));
+      res.write(JSON.stringify(err));
       res.end();
     }
   }

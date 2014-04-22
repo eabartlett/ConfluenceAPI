@@ -4,6 +4,9 @@
 
 /* Module imports */
 var util = require('./util.js');
+var mongoose = require('mongoose');
+
+var ObjectId = mongoose.Types.ObjectId;
 
 var errorCallback = util.errorCallback;
 
@@ -12,29 +15,34 @@ module.exports.post = function(db, schema){
     var q = {
       question: req.body.question,
       audio: req.body.audio,
-      user: req.body.user
+      user: req.body.user,
+      lang: req.body.lang
     };
+    console.log(q);
     schema.question(q).save(errorCallback(res));
     res.end('Success');
   }
 }
 module.exports.get = function(db, schema){
   return function getQ(req, res){
-    //TODO Write it
-  }
-
-}
-
-
-function errorCallback(res){
-  return function(err){
-    if(err){
-      res.writeHead(403,{
-        'Content-type': 'text/plain'
+    if(req.query.lang){
+      schema.question.findByLanguage(req.query.lang, function(err, data){
+        if(err) errorCallback(res)(err);
+        res.setHeader('Content-type', 'application/json');
+        res.end(JSON.stringify(data));
       });
-      res.write(err.message);
-      res.write(JSON.stringify(err.errors));
-      res.end();
+    }else if(req.query.id){
+      schema.question.findById(new ObjectId(req.query.id), function(err, data){
+        if(err) errorCallback(res)(err);
+        res.setHeader('Content-type', 'application/json');
+        res.end(JSON.stringify(data));
+      });
+    }else{
+      err = {
+        'message': 'Use this endpoint to query questions by language, id, or user',
+        'errors': 'Invalid query'
+        };
+      errorCallback(res)(err);
     }
   }
 }

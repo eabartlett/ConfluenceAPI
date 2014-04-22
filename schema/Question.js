@@ -10,6 +10,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var types = mongoose.Schema.Types;
+var ObjectId = types.ObjectId;
 
 var questionSchema = Schema({
   /*Commented out for testing, need to figure out exactly how this is going to work
@@ -26,17 +27,26 @@ var questionSchema = Schema({
     type: Date,
     default: Date.now,
     validation: function(v){return v > 0},
-    require: true
+    required: false
   },
   answers: {
     type: Array,
     default: [],
-    require: true
+    required: false
   },
   audio: {
     type: String,
-    require: false
+    required: false
+  },
+  lang: {
+    type: String,
+    validation: function(v){return v.length > 0},
+    required: true
   }
+});
+
+questionSchema.virtual('id').get(function(){
+  return this._id.toHexString();
 });
 
 /** TODO
@@ -45,6 +55,9 @@ var questionSchema = Schema({
  * Filter Questions by language
  * Filter questions by User
  */
+questionSchema.statics.findByLanguage = function(lang, cb){
+  this.find({language: lang}, cb);
+}
 
 var Question = mongoose.model('Question', questionSchema);
 
