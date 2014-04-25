@@ -25,13 +25,25 @@ module.exports.get = function(db, schema){
   return function getA(req, res){
     if(req.query.qid){
       //Get all answers for a given question given by question's id (qid)
-      schema.answer.findOne({question: new ObjectId(req.query.qid)}, responseDataCallback(res));
+      schema.answer.findOne({question: new ObjectId(req.query.qid)}, function(err, data){
+        if(err) errorCallback(res)(err);
+        res.setHeader('Content-type', 'application/json');
+        res.end(JSON.stringify(data));
+      });
     }else if(req.query.id){
       //Get an answer by it's id
-      schema.answer.findById(new ObjectId(req.query.id), responseDataCallback(res));
+      schema.answer.findById(new ObjectId(req.query.id), function(err, data){
+        if(err) errorCallback(res)(err);
+        res.setHeader('Content-type', 'application/json');
+        res.end(JSON.stringify(data));
+      });
     }else if(req.query.user){
       //Get all of a user's answers
-      schema.answer.find({user: new ObjectId(req.query.user)}, responseDataCallback(res));
+      schema.answer.find({user: new ObjectId(req.query.user)}, function(err, data){
+        if(err) errorCallback(res)(err);
+        res.setHeader('Content-type', 'application/json');
+        res.end(JSON.stringify(data));
+      });
     }else{
       //handle bad GET request
       var err = {

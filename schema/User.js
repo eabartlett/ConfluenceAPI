@@ -41,6 +41,7 @@ var userSchema = Schema({
     default: '8675309',
     required: true
   },
+  /* Don't think we'll use this, just use db queries
   questions: {
     type: Array,
     default: [],
@@ -49,6 +50,7 @@ var userSchema = Schema({
     type: Array,
     default: [],
   },
+  */
   learningLanguages: {
     type: Array,
     default: []
@@ -56,14 +58,6 @@ var userSchema = Schema({
   profLanguages: {
     type: Array,
     default: []
-  },
-  qbit: {
-    type: Boolean,
-    default: false
-  },
-  abit: {
-    type: Boolean,
-    default: false
   }
 });
 

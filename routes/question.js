@@ -37,6 +37,12 @@ module.exports.get = function(db, schema){
         res.setHeader('Content-type', 'application/json');
         res.end(JSON.stringify(data));
       });
+    }else if(req.query.user){
+      schema.question.find({user: new ObjectId(req.query.user)}, function(err, data){
+        if(err) errorCallback(res)(err);
+        res.setHeader('Content-type', 'application/json');
+        res.end(JSON.stringify(data));
+      });
     }else{
       err = {
         'message': 'Use this endpoint to query questions by language, id, or user',

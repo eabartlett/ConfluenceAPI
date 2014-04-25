@@ -27,11 +27,13 @@ var questionSchema = Schema({
     validation: function(v){return v > 0},
     required: false
   },
+  /* Query answers by question instead of this field
   answers: {
     type: Array,
     default: [],
     required: false
   },
+  */
   audio: {
     type: String,
     required: false
