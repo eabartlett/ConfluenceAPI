@@ -16,12 +16,13 @@ module.exports.post = function(db, schema){
       question: req.body.question,
       audio: req.body.audio,
       user: req.body.user,
-      lang: req.body.lang
+      lang: req.body.lang,
     };
-    console.log(q);
-    schema.question.create(q, postedCallback(res));
+    schema.question.create(q, responseDataCallback(res, q));
+    schema.user.findOneAndUpdate({_id: ObjectId(q.user)}, {qbit: false}, function(err){});
   }
 }
+
 module.exports.get = function(db, schema){
   return function getQ(req, res){
     if(req.query.lang){

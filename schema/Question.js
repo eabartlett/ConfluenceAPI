@@ -10,17 +10,15 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var types = mongoose.Schema.Types;
-var ObjectId = types.ObjectId;
+var ObjectId = mongoose.Types.ObjectId;
 
 var questionSchema = Schema({
-  /*Commented out for testing, need to figure out exactly how this is going to work
   user: {
-    type: types.ObjectID,
+    type: types.ObjectId,
     required: true,
-  }*/
+  },
   question: {
     type: String,
-    validation: function(v){return v.length > 0}, 
     required: true
   },
   time: {
@@ -57,7 +55,11 @@ questionSchema.virtual('id').get(function(){
  */
 questionSchema.statics.findByLanguage = function(lang, cb){
   this.find({language: lang}, cb);
-}
+};
+
+questionSchema.statics.findByUser = function(user, cb){
+  this.find({user: ObjectId(user)}, cb);
+};
 
 var Question = mongoose.model('Question', questionSchema);
 

@@ -11,12 +11,10 @@ var Schema = mongoose.Schema;
 var types = mongoose.Schema.Types;
 
 var answerSchema = Schema({
-  /* Put in once basic testing is done
   question: {
     type: types.ObjectId,
     require: true
   },
-  */
   answer: {
     type: String,
     require: true
@@ -26,12 +24,10 @@ var answerSchema = Schema({
     default: Date.now,
     required: false
   },
-  /* Put in once basic testing is done
   user: {
     type: types.ObjectId,
     required: true
   },
-  */
   audio: {
     type: String,
     default: null,
@@ -45,6 +41,14 @@ var Answer = mongoose.model('Answer', answerSchema);
  * Come up with all the mongodb queries we'll need and make them static functions
  * Filter Answers by User
  */
+
+answerSchema.statics.findByQuestion = function(question, cb){
+  this.find({question: ObjectId(question)}, cb);
+};
+
+answerSchema.statics.findByUser = function(user, cb){
+  this.find({user: ObjectId(user)}, cb);
+};
 
 module.exports = function(schema){
   schema.answer = Answer;

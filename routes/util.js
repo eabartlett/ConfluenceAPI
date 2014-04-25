@@ -10,7 +10,7 @@ function errorCallback(res){
   }
 }
 
-function responseDataCallback(res){
+function responseDataCallback(res, obj){
   return function(err, doc){
     if(err) errorCallback(res)(err);
     res.end(JSON.stringify(doc));

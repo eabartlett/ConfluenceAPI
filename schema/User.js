@@ -20,25 +20,21 @@ var Schema = mongoose.Schema;
 var userSchema = Schema({
   username: {
     type: String,
-    default: 'Confluence',
     required: true,
     unique: true
   },
   email: {
     type: String,
-    default: 'eb@confluence.com',
     required: true,
     unique: true
   },
   firstname: {
     type: String,
-    default: 'Anon',
-    required: true
+    required: false
   },
   lastname: {
     type: String,
-    default: 'Mouse',
-    required: true
+    required: false
   },
   pw: {
     type: String,
@@ -60,6 +56,14 @@ var userSchema = Schema({
   profLanguages: {
     type: Array,
     default: []
+  },
+  qbit: {
+    type: Boolean,
+    default: false
+  },
+  abit: {
+    type: Boolean,
+    default: false
   }
 });
 

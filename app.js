@@ -50,7 +50,8 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/users', user.list);
+app.post('/api/user', routes.user.post(db, schema));
+app.get('/api/user', routes.user.get(db, schema));
 app.post('/api/question', routes.question.post(db,schema));
 app.post('/api/answer', routes.answer.post(db, schema));
 app.get('/api/question', routes.question.get(db, schema));
