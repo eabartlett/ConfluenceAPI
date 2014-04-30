@@ -56,7 +56,7 @@ questionSchema.virtual('id').get(function(){
  * Filter questions by User
  */
 questionSchema.statics.findByLanguage = function(lang, cb){
-  this.find({language: lang}, cb);
+  this.find({lang: lang}, cb);
 };
 
 questionSchema.statics.findByUser = function(user, cb){
