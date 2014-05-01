@@ -64,7 +64,9 @@ var userSchema = Schema({
 /** Queries to create/execute (Schema methods)
  * Find all questions
  */
-
+userSchema.statics.validLogin = function(uname, passw, cb){
+  this.find({username: uname, pw: passw}, cb);
+};
 var User = mongoose.model('User', userSchema);
 
 module.exports = function(schema){

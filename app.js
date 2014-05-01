@@ -17,7 +17,8 @@ var app = express();
 
 var options = {
   key: fs.readFileSync('./www.eabartlett.com.key'),
-  cert: fs.readFileSync('./www.eabartlett.com.crt')
+  cert: fs.readFileSync('./www.eabartlett.com.crt'),
+  auth: 'Mullen1993'
 }
 
 //db setup
@@ -50,6 +51,10 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.get('/', function(req, res){
+  res.end('Hello World');
+});
+app.post('/api/login', routes.user.login(db, schema));
 app.post('/api/user', routes.user.post(db, schema));
 app.get('/api/user', routes.user.get(db, schema));
 app.post('/api/question', routes.question.post(db,schema));
