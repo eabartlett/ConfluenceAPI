@@ -7,7 +7,7 @@
 var express = require('express');
 var routes = require('./routes');
 var user = require('./routes/user');
-var https = require('https');
+var http = require('http');
 var path = require('path');
 var fs = require('fs');
 
@@ -18,7 +18,7 @@ var app = express();
 var options = {
   key: fs.readFileSync('./www.eabartlett.com.key'),
   cert: fs.readFileSync('./www.eabartlett.com.crt'),
-  auth: 'Mullen1993'
+  passphrase: 'Mullen1993'
 }
 
 //db setup
@@ -54,8 +54,7 @@ if ('development' == app.get('env')) {
 app.get('/', function(req, res){
   res.end('Hello World');
 });
-
-app.post('api/user/lang', routes.user.lang(db, schema));
+app.post('/api/user/lang', routes.user.lang(db, schema));
 app.post('/api/login', routes.user.login(db, schema));
 app.post('/api/user', routes.user.post(db, schema));
 app.get('/api/user', routes.user.get(db, schema));
@@ -67,6 +66,6 @@ app.post('/api/audio', routes.audio.post(db, schema, uploads));
 app.get('/api/audio', routes.audio.get(db, schema));
 
 //TODO Change the handling so that there are different endpoints for questions and answers
-https.createServer(options, app).listen(app.get('port'), function(){
+http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

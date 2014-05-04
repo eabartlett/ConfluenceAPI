@@ -15,6 +15,8 @@ var mongoose = require('mongoose');
 var path = require('path');
 var Schema = mongoose.Schema;
 
+var ObjectId = mongoose.Types.ObjectId;
+
 //TODO add in the plugin to schema
 
 var userSchema = Schema({
@@ -69,8 +71,8 @@ userSchema.statics.validLogin = function(uname, passw, cb){
 };
 
 userSchema.statics.addLang = function(id, lang, cb){
-  this.findOneAndUpdate({id: new ObjectId(id)}, {$push: { learningLanguages: lang }}, cb);
-});
+  this.findOneAndUpdate({_id: new ObjectId(id)}, {$push: { learningLanguages: lang }}, cb);
+};
 var User = mongoose.model('User', userSchema);
 
 module.exports = function(schema){
