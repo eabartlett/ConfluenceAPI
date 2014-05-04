@@ -15,6 +15,15 @@ var ObjectId = mongoose.Types.ObjectId;
 var responseDataCallback = util.responseDataCallback;
 var errorCallback = util.errorCallback;
 
+exports.lang = function(db, schema){
+  return function(req, res){
+    schema.user.addLang(req.body.id, req.body.lang, function(err, data){
+      if(!err) res.end(JSON.stringify(err));
+      res.end(JSON.stringify(data));
+    });
+  }
+}
+
 exports.login = function(db, schema){
   return function(req, res){
     schema.user.validLogin(req.body.username, bcrypt.hashSync(req.body.pw, salt), function(err, data){

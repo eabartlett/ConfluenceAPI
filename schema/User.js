@@ -67,6 +67,10 @@ var userSchema = Schema({
 userSchema.statics.validLogin = function(uname, passw, cb){
   this.find({username: uname, pw: passw}, cb);
 };
+
+userSchema.statics.addLang = function(id, lang, cb){
+  this.findOneAndUpdate({id: new ObjectId(id)}, {$push: { learningLanguages: lang }}, cb);
+});
 var User = mongoose.model('User', userSchema);
 
 module.exports = function(schema){

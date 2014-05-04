@@ -25,7 +25,7 @@ module.exports.get = function(db, schema){
         'Content-type': 'audio/mp4',
         'Content-length': stat.size
       });
-      file.pipe(res);
+      res.pipe(file);
       res.end();
     });
   }
