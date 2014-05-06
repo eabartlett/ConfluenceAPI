@@ -26,7 +26,7 @@ exports.delLang = function(db, schema){
 
 exports.lang = function(db, schema){
   return function(req, res){
-    schema.user.addLang(req.body.id, req.body.lang, function(err, data){
+    schema.user.addLang(req.body.id, req.body.lang.toLowerCase(), function(err, data){
      if(!err) res.end(JSON.stringify(err));
       res.end(JSON.stringify(data));
     });
