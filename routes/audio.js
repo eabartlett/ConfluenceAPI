@@ -39,9 +39,8 @@ module.exports.post = function(db, schema, uploadPath){
     form.parse(req, function(err, fields, files){
       var model = (fields.question)?schema.question:schema.answer;
       var id = (fields.question)?fields.question:fields.answer;
-      var filename = path.join(uploadPath, id+'.mp3');
+      var filename = path.join(uploadPath, id+'.3gp');
       console.log(files.audio);
-      
       model.findOneAndUpdate(
         {_id: new ObjectId(id)}, {audio: filename}, function(err){}
       );
@@ -52,6 +51,7 @@ module.exports.post = function(db, schema, uploadPath){
         if(!data){
           res.end("Invalid question Id");
         }
+	console.log(data);
         res.end(JSON.stringify(data));
       });
     });
