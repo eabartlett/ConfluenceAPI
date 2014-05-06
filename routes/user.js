@@ -15,10 +15,19 @@ var ObjectId = mongoose.Types.ObjectId;
 var responseDataCallback = util.responseDataCallback;
 var errorCallback = util.errorCallback;
 
+exports.delLang = function(db, schema){
+  return function(req, res){
+    schema.user.delLang(req.body.id, req.body.lang, function(err, data){
+      if(!err) res.end(JSON.stringify(err));
+      res.end(JSON.stringify(data));
+    });
+  }
+}
+
 exports.lang = function(db, schema){
   return function(req, res){
     schema.user.addLang(req.body.id, req.body.lang, function(err, data){
-      if(!err) res.end(JSON.stringify(err));
+     if(!err) res.end(JSON.stringify(err));
       res.end(JSON.stringify(data));
     });
   }

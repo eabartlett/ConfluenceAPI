@@ -54,6 +54,8 @@ if ('development' == app.get('env')) {
 app.get('/', function(req, res){
   res.end('Hello World');
 });
+
+app.post('/api/user/langdel', routes.user.delLang(db, schema));
 app.post('/api/user/lang', routes.user.lang(db, schema));
 app.post('/api/login', routes.user.login(db, schema));
 app.post('/api/user', routes.user.post(db, schema));
