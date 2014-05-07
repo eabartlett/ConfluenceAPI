@@ -9,6 +9,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var types = mongoose.Schema.Types;
+var ObjectId = mongoose.Types.ObjectId;
 
 var answerSchema = Schema({
   question: {
@@ -35,7 +36,6 @@ var answerSchema = Schema({
   }
 });
 
-var Answer = mongoose.model('Answer', answerSchema);
 
 /** TODO
  * Come up with all the mongodb queries we'll need and make them static functions
@@ -50,6 +50,7 @@ answerSchema.statics.findByUser = function(user, cb){
   this.find({user: ObjectId(user)}, cb);
 };
 
+var Answer = mongoose.model('Answer', answerSchema);
 module.exports = function(schema){
   schema.answer = Answer;
 };

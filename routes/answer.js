@@ -12,6 +12,7 @@ var responseDataCallback = util.responseDataCallback;
 
 module.exports.post = function(db, schema){
   return function postA(req, res){
+    console.log(req.body.user, req.body.question);
     var a = {
       answer: req.body.answer,
       question: new ObjectId(req.body.question),
@@ -25,7 +26,8 @@ module.exports.get = function(db, schema){
   return function getA(req, res){
     if(req.query.qid){
       //Get all answers for a given question given by question's id (qid)
-      schema.answer.findOne({question: new ObjectId(req.query.qid)}, function(err, data){
+      schema.answer.findByQuestion(req.query.qid, function(err, data){
+	console.log(data);
         if(err) errorCallback(res)(err);
         res.setHeader('Content-type', 'application/json');
         res.end(JSON.stringify(data));

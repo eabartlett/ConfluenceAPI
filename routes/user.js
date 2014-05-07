@@ -37,7 +37,7 @@ exports.proflang = function(db, schema){
   return function(req, res){
     schema.user.addProfLang(req.body.id, req.body.lang, function(err, data){
       if(!err) res.end(JSON.stringify(err));
-      res.edn(JSON.stringify(data));
+      res.end(JSON.stringify(data));
     });
   }
 }
