@@ -24,11 +24,20 @@ exports.delLang = function(db, schema){
   }
 }
 
-exports.lang = function(db, schema){
+exports.learnlang = function(db, schema){
   return function(req, res){
-    schema.user.addLang(req.body.id, req.body.lang, function(err, data){
+    schema.user.addLearnLang(req.body.id, req.body.lang, function(err, data){
       if(!err) res.end(JSON.stringify(err));
       res.end(JSON.stringify(data));
+    });
+  }
+}
+
+exports.proflang = function(db, schema){
+  return function(req, res){
+    schema.user.addProfLang(req.body.id, req.body.lang, function(err, data){
+      if(!err) res.end(JSON.stringify(err));
+      res.edn(JSON.stringify(data));
     });
   }
 }
