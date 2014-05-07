@@ -81,15 +81,15 @@ userSchema.statics.addLearnLang = function(id, lang, cb){
   this.findById(new ObjectId(id), function(err, data){
     console.log(data)
   });
-  this.findOneAndUpdate({_id: new ObjectId(id)}, {$push: { profLangauges: lang }}, cb);
+  this.findOneAndUpdate({_id: new ObjectId(id)}, {$push: { learningLangauges: lang }}, cb);
 };
 
-userSchema.statics.delLang = function(id, lang, cb){
+/*userSchema.statics.delLang = function(id, lang, cb){
   this.findById(new ObjectId(id), function(err, data){
     console.log(data)
   });
   this.findOneAndUpdate({_id: new ObjectId(id)}, {$pull: { learningLanguages: lang }}, cb);
-};
+};*/
 var User = mongoose.model('User', userSchema);
 
 module.exports = function(schema){

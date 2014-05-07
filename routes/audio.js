@@ -17,13 +17,14 @@ module.exports.get = function(db, schema){
   return function(req, res){
     var model = (req.query.question)?schema.question:schema.answer;
     var id = (req.query.question)?req.query.question:req.query.answer;
+    console.log(id);
     model.findById(new ObjectId(id), function(err, data){
       console.log(data.audio);
       var stat = fs.statSync(data.audio);
       var file = fs.createReadStream(data.audio);
-      console.log(file);
+      console.log(stat.size);
       res.writeHeader(200, {
-        'Content-type': 'audio/mpeg',
+        'Content-type': 'audio/*',
         'Content-length': stat.size
       });
       file.pipe(res);
