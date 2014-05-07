@@ -27,7 +27,6 @@ module.exports.get = function(db, schema){
         'Content-length': stat.size
       });
       file.pipe(res);
-      res.end();
     });
   }
 }
