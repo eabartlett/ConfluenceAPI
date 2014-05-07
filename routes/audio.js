@@ -20,14 +20,22 @@ module.exports.get = function(db, schema){
     console.log(id);
     model.findById(new ObjectId(id), function(err, data){
       console.log(data.audio);
-      var stat = fs.statSync(data.audio);
-      var file = fs.createReadStream(data.audio);
-      console.log(stat.size);
-      res.writeHeader(200, {
-        'Content-type': 'audio/*',
-        'Content-length': stat.size
-      });
-      file.pipe(res);
+      if(data.audio){
+        var stat = fs.statSync(data.audio);
+        var file = fs.createReadStream(data.audio);
+        console.log(stat.size);
+        res.writeHeader(200, {
+          'Content-type': 'audio/*',
+          'Content-length': stat.size
+        });
+        file.pipe(res);
+      }else{
+        res.writeHeader(200, {
+          'Content-type': 'audio/*',
+          'Content-length': 0
+        });
+        res.end();
+      }
     });
   }
 }
