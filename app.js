@@ -55,7 +55,8 @@ app.get('/', function(req, res){
   res.end('Hello World');
 });
 
-app.post('/api/user/dellang', routes.user.delLang(db, schema));
+app.post('/api/user/delproflang', routes.user.delProfLang(db, schema));
+app.post('/api/user/dellearnlang', routes.user.delLearnLang(db, schema));
 app.post('/api/user/learnlang', routes.user.learnlang(db, schema));
 app.post('/api/user/proflang', routes.user.proflang(db, schema));
 app.post('/api/login', routes.user.login(db, schema));

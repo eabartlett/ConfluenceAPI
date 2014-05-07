@@ -15,9 +15,18 @@ var ObjectId = mongoose.Types.ObjectId;
 var responseDataCallback = util.responseDataCallback;
 var errorCallback = util.errorCallback;
 
-exports.delLang = function(db, schema){
+exports.delLearnLang = function(db, schema){
   return function(req, res){
-    schema.user.delLang(req.body.id, req.body.lang, function(err, data){
+    schema.user.delLearnLang(req.body.id, req.body.lang, function(err, data){
+      if(!err) res.end(JSON.stringify(err));
+      res.end(JSON.stringify(data));
+    });
+  }
+}
+
+exports.delProfLang = function(db, schema){
+  return function(req, res){
+    schema.user.delProfLang(req.body.id, req.body.lang, function(err, data){
       if(!err) res.end(JSON.stringify(err));
       res.end(JSON.stringify(data));
     });
