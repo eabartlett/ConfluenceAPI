@@ -26,13 +26,18 @@ var answerSchema = Schema({
     required: false
   },
   user: {
-    type: types.ObjectId,
+    type: String,
     required: true
   },
   audio: {
     type: String,
     default: null,
     required: false
+  },
+  rating: {
+    type: Number,
+    required: false,
+    default: 0
   }
 });
 
@@ -48,6 +53,14 @@ answerSchema.statics.findByQuestion = function(question, cb){
 
 answerSchema.statics.findByUser = function(user, cb){
   this.find({user: ObjectId(user)}, cb);
+};
+
+answerSchema.statics.increment = function(id, cb){
+  this.findOneAndUpdate({_id: new ObjectId(id)}, {$inc:{rating:1}}, cb);
+};
+
+answerSchema.statics.decrement = function(id, cb){
+  this.findOneAndUpdate({_id: new ObjectId(id)}, {$inc:{rating:-1}}, cb);
 };
 
 var Answer = mongoose.model('Answer', answerSchema);

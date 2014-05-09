@@ -16,11 +16,33 @@ module.exports.post = function(db, schema){
     var a = {
       answer: req.body.answer,
       question: new ObjectId(req.body.question),
-      user: new ObjectId(req.body.user)
+      user: req.body.user
     }
     schema.answer.create(a, responseDataCallback(res));
   }
 }
+
+module.exports.incAnswer = function(db, schema){
+  return function(req, res){
+    if(req.body.id){
+      schema.answer.increment(req.body.id, responseDataCallback(res));
+    }else{
+      res.setHeader('Content-type', 'text/plain');
+      res.end('Invalid Answer ID');
+    }
+  }
+};
+
+module.exports.decAnswer = function(db, schema){
+  return function(req, res){
+    if(req.body.id){
+      schema.answer.decrement(req.body.id, responseDataCallback(res));
+    }else{
+      res.setHeader('Content-type', 'text/plain');
+      res.end('Invalid Answer ID');
+    }
+  }
+};
 
 module.exports.get = function(db, schema){
   return function getA(req, res){
@@ -41,7 +63,7 @@ module.exports.get = function(db, schema){
       });
     }else if(req.query.user){
       //Get all of a user's answers
-      schema.answer.find({user: new ObjectId(req.query.user)}, function(err, data){
+      schema.answer.find({user: req.query.user}, function(err, data){
         if(err) errorCallback(res)(err);
         res.setHeader('Content-type', 'application/json');
         res.end(JSON.stringify(data));
@@ -55,4 +77,4 @@ module.exports.get = function(db, schema){
       errorCallback(res)(err);
     }
   }
-}
+
