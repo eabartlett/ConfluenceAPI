@@ -18,6 +18,7 @@ module.exports.post = function(db, schema){
       question: new ObjectId(req.body.question),
       user: req.body.user
     }
+    schema.question.incAnswers(req.body.question, function(err, data){});
     schema.answer.create(a, responseDataCallback(res));
   }
 }
