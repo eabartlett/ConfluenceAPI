@@ -25,6 +25,7 @@ module.exports.post = function(db, schema){
 module.exports.incAnswer = function(db, schema){
   return function(req, res){
     if(req.body.id){
+      console.log(req.body.id);
       schema.answer.increment(req.body.id, responseDataCallback(res));
     }else{
       res.setHeader('Content-type', 'text/plain');
