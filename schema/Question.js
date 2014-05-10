@@ -27,13 +27,6 @@ var questionSchema = Schema({
     validation: function(v){return v > 0},
     required: false
   },
-  /* Query answers by question instead of this field
-  answers: {
-    type: Array,
-    default: [],
-    required: false
-  },
-  */
   audio: {
     type: String,
     required: false
@@ -42,6 +35,11 @@ var questionSchema = Schema({
     type: String,
     validation: function(v){return v.length > 0},
     required: true
+  },
+  numAnswers: {
+    type: Number,
+    required: true,
+    default: 0
   }
 });
 
@@ -57,6 +55,10 @@ questionSchema.virtual('id').get(function(){
  */
 questionSchema.statics.findByLanguage = function(lang, cb){
   this.find({lang: lang}, cb);
+};
+
+questionSchema.statics.incAnswers = function(id, cb){
+  this.findOneAndUpdate({_id: new ObjectId(id)}, {$inc:{numAnswers:1}}, cb);
 };
 
 questionSchema.statics.findByUser = function(user, cb){
