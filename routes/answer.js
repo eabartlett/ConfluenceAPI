@@ -12,7 +12,7 @@ var responseDataCallback = util.responseDataCallback;
 
 module.exports.post = function(db, schema){
   return function postA(req, res){
-    console.log(req.body.user, req.body.question);
+    console.log(req.body);
     var a = {
       answer: req.body.answer,
       question: new ObjectId(req.body.question),
@@ -77,4 +77,4 @@ module.exports.get = function(db, schema){
       errorCallback(res)(err);
     }
   }
-
+}

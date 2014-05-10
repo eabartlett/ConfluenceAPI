@@ -48,11 +48,11 @@ var answerSchema = Schema({
  */
 
 answerSchema.statics.findByQuestion = function(question, cb){
-  this.find({question: ObjectId(question)}, cb);
+  this.find({question: new ObjectId(question)}, cb);
 };
 
 answerSchema.statics.findByUser = function(user, cb){
-  this.find({user: ObjectId(user)}, cb);
+  this.find({user: new ObjectId(user)}, cb);
 };
 
 answerSchema.statics.increment = function(id, cb){

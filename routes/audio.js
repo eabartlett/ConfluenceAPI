@@ -45,10 +45,11 @@ module.exports.post = function(db, schema, uploadPath){
     //use model.update to put path to file into the db
     var form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files){
+    console.log(fields, files);
       var model = (fields.question)?schema.question:schema.answer;
       var id = (fields.question)?fields.question:fields.answer;
       var filename = path.join(uploadPath, id+'.3gp');
-      console.log(files.audio);
+      console.log(files.audio.path);
       model.findOneAndUpdate(
         {_id: new ObjectId(id)}, {audio: filename}, function(err){}
       );

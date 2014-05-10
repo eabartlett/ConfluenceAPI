@@ -1,6 +1,7 @@
 function errorCallback(res){
   return function(err){
     if(err){
+      console.log(err);
       res.writeHead(403,{
         'Content-type': 'text/plain'
       });
@@ -10,9 +11,10 @@ function errorCallback(res){
   }
 }
 
-function responseDataCallback(res, obj){
+function responseDataCallback(res){
   return function(err, doc){
     if(err) errorCallback(res)(err);
+    console.log(doc);
     res.end(JSON.stringify(doc));
   }
 }
