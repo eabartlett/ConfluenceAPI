@@ -15,11 +15,6 @@ var app = express();
 
 //app.use(express.bodyParser());
 
-var options = {
-  key: fs.readFileSync('./www.eabartlett.com.key'),
-  cert: fs.readFileSync('./www.eabartlett.com.crt'),
-  passphrase: 'Mullen1993'
-}
 
 //db setup
 var mongoose = require('mongoose');
