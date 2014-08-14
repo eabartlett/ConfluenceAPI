@@ -1,5 +1,5 @@
-www.eabartlett.com.*
-uploads
-*.swp
-node_modules
-*.key
+/www.eabartlett.com.*
+/uploads
+/*.swp
+/node_modules
+/*.key
