@@ -24,6 +24,7 @@ A demo of the application can be found [here](https://www.youtube.com/watch?v=yS
   * It is extremely lightweight and allows for a minimal amount of code being written before the app is up and running
 * MongoDB
   * Once again NoSQL database are a technology that was becoming more popular in industry and I had never worked with them, so I decided learning how to write an app that has simple interactions with the database would be useful in the future.
+  * I knew that it interfaced well with node.js.
 * Mongoose.js
   * It was the first MongoDB ODM I read about and it fit my basic needs.
   
